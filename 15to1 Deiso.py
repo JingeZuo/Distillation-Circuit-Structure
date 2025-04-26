@@ -1070,7 +1070,7 @@ CNOT2Z = ['Z92', 'Z102', 'Z112', 'Z122', 'Z132', 'Z142', 'Z152']
 CNOT2Z_edges = [{'data': {'source': 'CZ823','target': target,}} for target in CNOT2Z]
 
 CNOT3X = ['CX534', 'CX634', 'CX734', 'CX1234', 'CX1334', 'CX1434', 'CX1534']  # 按需扩展
-CNOT3X_edges = [{'data': {'source': 'X44','target': target,}} for target in CNOT3X]
+CNOT3X_edges = [{'data': {'source': 'X43','target': target,}} for target in CNOT3X]
 CNOT3Z = ['Z53', 'Z63', 'Z73', 'Z123', 'Z133', 'Z143', 'Z153']
 CNOT3Z_edges = [{'data': {'source': 'CZ434','target': target,}} for target in CNOT3Z]
 
