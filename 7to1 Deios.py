@@ -2,7 +2,6 @@ import dash
 import dash_cytoscape as cyto
 from dash import html
 #%%
-#15to1原始tanner graph
 TGpri = dash.Dash(__name__)
 
 elements = [
