@@ -15,35 +15,19 @@ def generate_binary_combinations(input_matrix):
             all_combinations.append(matrix)
 
     return all_combinations
-def XInvevolution(A):
-    C=[15,1,2,4,8,16]
-    T=[3,5,6,7,9,10,11,12,13,14,15]
-    CX=[[3,5,6,9,10,12],
-        [3,5,7,9,11,13,15],
-        [3,6,7,10,11,14,15],
-        [5,6,7,12,13,14,15],
-        [9,10,11,12,13,14,15],
-        [15]]
+def XInvevolution(C,CX,A):
     EV=A.copy()
-    for i in range(6):
+    for i in range(len(C)):
         B=EV[:,-1,np.newaxis].copy()
         for j in range(len(CX[i])):
             B[CX[i][j]-1][0]=(B[CX[i][j]-1][0]+B[C[i]-1][0])%2
         EV = np.hstack((EV, B))
     return EV
-A=np.array([[1],[0],[1],[0],[1],[0],[1],[0],[1],[0],[1],[0],[1],[0],[1],[0]])
 
-def ZInvevolution(A):
-    C=[15,1,2,4,8,16]
-    T=[3,5,6,7,9,10,11,12,13,14,15]
-    CX=[[3,5,6,9,10,12],
-        [3,5,7,9,11,13,15],
-        [3,6,7,10,11,14,15],
-        [5,6,7,12,13,14,15],
-        [9,10,11,12,13,14,15],
-        [15]]
+
+def ZInvevolution(C,CX,A):
     EV=A.copy()
-    for i in range(6):
+    for i in range(len(C)):
         s=0
         for j in range(len(CX[i])):
             s = s + EV[CX[i][j]-1][i]
@@ -52,43 +36,51 @@ def ZInvevolution(A):
         EV=np.hstack((EV,B))
     return EV
 
+C=[15,1,2,4,8,16]
+CX=[[3,5,6,9,10,12],
+        [3,5,7,9,11,13,15],
+        [3,6,7,10,11,14,15],
+        [5,6,7,12,13,14,15],
+        [9,10,11,12,13,14,15],
+        [15]]
+
 g1=np.array([[1],[0],[1],[0],[1],[0],[1],[0],[1],[0],[1],[0],[1],[0],[1],[0]])
-g1XEV=XInvevolution(g1)
-g1ZEV=ZInvevolution(g1)
+g1XEV=XInvevolution(C,CX,g1)
+g1ZEV=ZInvevolution(C,CX,g1)
 g1Z=np.array(generate_binary_combinations(g1))
 G1=[]
 for i in range(len(generate_binary_combinations(g1))):
-    S=np.array(ZInvevolution(g1Z[i]))
+    S=np.array(ZInvevolution(C,CX,g1Z[i]))
     G1.append(np.vstack((g1XEV, S)))
 G1=np.array(G1)
 
 g2=np.array([[0],[1],[1],[0],[0],[1],[1],[0],[0],[1],[1],[0],[0],[1],[1],[0]])
-g2XEV=XInvevolution(g2)
-g2ZEV=ZInvevolution(g2)
+g2XEV=XInvevolution(C,CX,g2)
+g2ZEV=ZInvevolution(C,CX,g2)
 g2Z=np.array(generate_binary_combinations(g2))
 G2=[]
 for i in range(len(generate_binary_combinations(g2))):
-    S=np.array(ZInvevolution(g2Z[i]))
+    S=np.array(ZInvevolution(C,CX,g2Z[i]))
     G2.append(np.vstack((g2XEV, S)))
 G2=np.array(G2)
 
 g3=np.array([[0],[0],[0],[1],[1],[1],[1],[0],[0],[0],[0],[1],[1],[1],[1],[0]])
-g3XEV=XInvevolution(g3)
-g3ZEV=ZInvevolution(g3)
+g3XEV=XInvevolution(C,CX,g3)
+g3ZEV=ZInvevolution(C,CX,g3)
 g3Z=np.array(generate_binary_combinations(g3))
 G3=[]
 for i in range(len(generate_binary_combinations(g3))):
-    S=np.array(ZInvevolution(g3Z[i]))
+    S=np.array(ZInvevolution(C,CX,g3Z[i]))
     G3.append(np.vstack((g3XEV, S)))
 G3=np.array(G3)
 
 g4=np.array([[0],[0],[0],[0],[0],[0],[0],[1],[1],[1],[1],[1],[1],[1],[1],[0]])
-g4XEV=XInvevolution(g4)
-g4ZEV=ZInvevolution(g4)
+g4XEV=XInvevolution(C,CX,g4)
+g4ZEV=ZInvevolution(C,CX,g4)
 g4Z=np.array(generate_binary_combinations(g4))
 G4=[]
 for i in range(len(generate_binary_combinations(g4))):
-    S=np.array(ZInvevolution(g4Z[i]))
+    S=np.array(ZInvevolution(C,CX,g4Z[i]))
     G4.append(np.vstack((g4XEV, S)))
 G4=np.array(G4)
-print(G1.shape,G2.shape,G3.shape,G4.shape)
+
