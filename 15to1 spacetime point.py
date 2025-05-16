@@ -1,6 +1,7 @@
 import qiskit
 from matplotlib import pyplot as plt
 from qiskit import QuantumCircuit, transpile
+from qiskit.circuit.library import XGate
 from qiskit.quantum_info import Clifford, Statevector, DensityMatrix
 from qiskit_aer import AerSimulator
 import numpy as np
@@ -52,91 +53,75 @@ g=[[12,11,10,9,8,7,6,5],
 
 state0=Statevector.from_instruction(qc)
 qc.barrier()
-
+qc.draw()
+plt.show()
 #%%
 #stablizer1
 qc.x(g[0])
 state1=(state0+Statevector.from_instruction(qc))/2
 qc.barrier()
-
+qc.draw()
+plt.show()
 #%%
 #stablizer2
 qc.x(g[1])
 state2=(state1+Statevector.from_instruction(qc))/2
 qc.barrier()
-
+qc.draw()
+plt.show()
 #%%
 #stablizer3
 qc.x(g[2])
 state3=(state2+Statevector.from_instruction(qc))/2
 qc.barrier()
-
+qc.draw()
+plt.show()
 #%%
 #stablizer4
 qc.x(g[3])
 state4=(state3+Statevector.from_instruction(qc))/2
 qc.barrier()
-
+qc.draw()
+plt.show()
 #%%
 #Logical X+1
 qc.x(allqubit)
 state=Statevector.from_instruction(qc)
 stateLplus=(state4+state)/2
-qc.barrier()
 normLplus=np.linalg.norm(stateLplus.data)
-
-#%%
-#Logical X-1
-stateLminus=(state4-state)/2
-qc.z(0)
-normLminus=np.linalg.norm(stateLminus.data)
-stateLminusZ=normLminus*Statevector.from_instruction(qc)
-normLminusZ=np.linalg.norm(stateLminusZ.data)
-
-#%%
-# 定义矩阵
-U = np.array([
-    [0, np.exp(-1j * np.pi / 4)],
-    [np.exp(1j * np.pi / 4), 0]
-])
-
-# 创建 Operator 对象
-eigenT= Operator(U)
-qc.unitary(eigenT,0,label='EigenT')
+proLplus=abs(normLplus)**2
+print(proLplus)
 qc.barrier()
 qc.draw()
 plt.show()
 #%%
-is_equiv = stateLplus.equiv(Statevector.from_instruction(qc))
-print(f"等价性判断: {is_equiv}")
+#Logical X-1
+q=QuantumCircuit(16)
+q.z(0)
+stateLm=(state4-state)/2
+normLminus=np.linalg.norm(stateLm.data)
+stateLminus=(stateLm).evolve(q)
+proLminus=abs(normLminus)**2
+print(proLminus)
 #%%
-
-# 3. 编译并运行电路
-# ---------------------------
-# 创建模拟器后端
-backend = AerSimulator()  # 自动支持动态电路
-# 显式编译电路（替代旧版 compile() 方法）
-transpiled_circuit = transpile(qc, backend)  # 关键修复点
-# 执行电路
-job = backend.run(transpiled_circuit, shots=20)
-result = job.result()
-counts = result.get_counts()
-
-# ---------------------------
-# 4. 结果输出
-# ---------------------------
-#list转换
-counts_list = [[int(c) for c in key.split()] for key in counts]
-#logicalX,generatorX
-for i in range(len(counts_list)):
-    l=0
-    for j in range(len(counts_list[i])-1):
-        l=l+counts_list[i][j]
-    for m in range(len(g)):
-        s = 0
-        for n in range(len(g[m])):
-            s=s+counts_list[i][g[m][n]]
-        print('s',m,s%2)
-    print(l%2)
+# 定义矩阵
+q=QuantumCircuit(16)
+U = np.array([
+    [0, np.exp(-1j * np.pi / 4)],
+    [np.exp(1j * np.pi / 4), 0]
+])
+# 创建 Operator 对象
+eigenT= Operator(U)
+q.unitary(eigenT,0,label='EigenT')
+magicplus=(stateLplus+stateLplus.evolve(q))/2
+magicminus=(stateLminus+stateLminus.evolve(q))/2
+promplus=abs(np.linalg.norm(magicplus.data))**2
+promminus=abs(np.linalg.norm(magicminus.data))**2
+print(promplus)
+print(promminus)
+print(promplus+promminus)
+#%%
+is_equiv = state4.equiv(state3)
+print(f"等价性判断: {is_equiv}")
 
 
