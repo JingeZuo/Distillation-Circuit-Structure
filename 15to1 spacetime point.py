@@ -89,8 +89,9 @@ qc.x(allqubit)
 state=Statevector.from_instruction(qc)
 stateLplus=(state4+state)/2
 normLplus=np.linalg.norm(stateLplus.data)
-proLplus=abs(normLplus)**2
-print(proLplus)
+proLplus=np.vdot(stateLplus.data,stateLplus.data)
+print('逻辑投影+1概率',proLplus)
+stateLplus=stateLplus/normLplus
 qc.barrier()
 qc.draw()
 plt.show()
@@ -101,8 +102,9 @@ q.z(0)
 stateLm=(state4-state)/2
 normLminus=np.linalg.norm(stateLm.data)
 stateLminus=(stateLm).evolve(q)
-proLminus=abs(normLminus)**2
-print(proLminus)
+proLminus=np.vdot(stateLminus.data,stateLminus.data)
+print('逻辑投影-1概率',proLminus)
+stateLminus=stateLminus/normLminus
 #%%
 # 定义矩阵
 q=QuantumCircuit(16)
@@ -115,13 +117,10 @@ eigenT= Operator(U)
 q.unitary(eigenT,0,label='EigenT')
 magicplus=(stateLplus+stateLplus.evolve(q))/2
 magicminus=(stateLminus+stateLminus.evolve(q))/2
-promplus=abs(np.linalg.norm(magicplus.data))**2
-promminus=abs(np.linalg.norm(magicminus.data))**2
-print(promplus)
-print(promminus)
-print(promplus+promminus)
-#%%
-is_equiv = state4.equiv(state3)
-print(f"等价性判断: {is_equiv}")
+promplus=np.vdot(magicplus.data,magicplus.data)
+promminus=np.vdot(magicminus.data,magicminus.data)
+print('+1魔术态保真度',promplus)
+print('-1魔术态保真度',promminus)
+print('提纯成功概率',proLplus+proLminus)
 
 
