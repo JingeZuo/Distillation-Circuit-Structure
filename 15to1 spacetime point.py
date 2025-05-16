@@ -27,23 +27,36 @@ qc=QuantumCircuit(q16,q15,q14,q13,q12,q11,q10,q9,q8,q7,q6,q5,q4,q3,q2,q1)
 
 qc.h([15,14,12,8,0])
 qc.barrier()
+
 qc.cx(0,1)
+
 qc.barrier()
+
 for i in [7,6,5,4,3,2,1]:
     qc.cx(8,i)
+
 qc.barrier()
+
 for i in [11,10,9,4,3,2,1]:
     qc.cx(12,i)
+
 qc.barrier()
+
 for i in [13,10,9,6,5,2,1]:
     qc.cx(14,i)
+
 qc.barrier()
+
 for i in [13,11,9,7,5,3,1]:
     qc.cx(15,i)
+
 qc.barrier()
+
 for i in [13,11,10,7,6,4]:
     qc.cx(1,i)
+
 qc.barrier()
+
 allqubit=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 qc.tdg(allqubit)
 g=[[12,11,10,9,8,7,6,5],
@@ -60,29 +73,25 @@ plt.show()
 qc.x(g[0])
 state1=(state0+Statevector.from_instruction(qc))/2
 qc.barrier()
-qc.draw()
-plt.show()
+
 #%%
 #stablizer2
 qc.x(g[1])
 state2=(state1+Statevector.from_instruction(qc))/2
 qc.barrier()
-qc.draw()
-plt.show()
+
 #%%
 #stablizer3
 qc.x(g[2])
 state3=(state2+Statevector.from_instruction(qc))/2
 qc.barrier()
-qc.draw()
-plt.show()
+
 #%%
 #stablizer4
 qc.x(g[3])
 state4=(state3+Statevector.from_instruction(qc))/2
 qc.barrier()
-qc.draw()
-plt.show()
+
 #%%
 #Logical X+1
 qc.x(allqubit)
@@ -93,8 +102,7 @@ proLplus=np.vdot(stateLplus.data,stateLplus.data)
 print('逻辑投影+1概率',proLplus)
 stateLplus=stateLplus/normLplus
 qc.barrier()
-qc.draw()
-plt.show()
+
 #%%
 #Logical X-1
 q=QuantumCircuit(16)
@@ -115,6 +123,7 @@ U = np.array([
 # 创建 Operator 对象
 eigenT= Operator(U)
 q.unitary(eigenT,0,label='EigenT')
+
 magicplus=(stateLplus+stateLplus.evolve(q))/2
 magicminus=(stateLminus+stateLminus.evolve(q))/2
 promplus=np.vdot(magicplus.data,magicplus.data)

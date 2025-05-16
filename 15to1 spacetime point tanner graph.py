@@ -5,7 +5,7 @@ TGpri = dash.Dash(__name__)
 elements = [
     #第一行
 {'data': {'id': 'q1', 'label': '+','group': 'q'}, 'position': {'x': 0, 'y': 0}},
-{'data': {'id': 'E11','group': 'E'}, 'position': {'x': 450, 'y': 0}},
+{'data': {'id': 'E11','group': 'ZE'}, 'position': {'x': 450, 'y': 0}},
 {'data': {'id': 'c1','group': 'c'}, 'position': {'x': 500, 'y': 0}},
 {'data': {'id': 'E12','group': 'E'}, 'position': {'x': 550, 'y': 0}},
 {'data': {'id': 'T1','label': 'T','group': 'T'}, 'position': {'x': 700, 'y': 0}},
@@ -13,7 +13,7 @@ elements = [
 {'data': {'source': 'c1', 'target': 'T1'}},
     #第二行
 {'data': {'id': 'q2', 'label': '+','group': 'q'}, 'position': {'x': 0, 'y': 100}},
-{'data': {'id': 'E21','group': 'E'}, 'position': {'x':350, 'y': 100}},
+{'data': {'id': 'E21','group': 'ZE'}, 'position': {'x':350, 'y': 100}},
 {'data': {'id': 'c2','group': 'c'}, 'position': {'x': 400, 'y': 100}},
 {'data': {'id': 'E22','group': 'E'}, 'position': {'x':450, 'y': 100}},
 {'data': {'id': 'T2','label': 'T','group': 'T'}, 'position': {'x': 700, 'y': 100}},
@@ -21,7 +21,7 @@ elements = [
 {'data': {'source': 'c2', 'target': 'T2'}},
     #第三行
 {'data': {'id': 'q3', 'label': '0','group': 'q'}, 'position': {'x': 0, 'y': 200}},
-{'data': {'id': 'E31','group': 'E'}, 'position': {'x': 350, 'y': 200}},
+{'data': {'id': 'E31','group': 'XE'}, 'position': {'x': 350, 'y': 200}},
 {'data': {'id': 't34','group': 't'}, 'position': {'x': 400, 'y': 200}},
 {'data': {'id': 'E32','group': 'E'}, 'position': {'x': 450, 'y': 200}},
 {'data': {'id': 't35','group': 't'}, 'position': {'x': 500, 'y': 200}},
@@ -35,7 +35,7 @@ elements = [
 {'data': {'source': 't36', 'target': 'T3'}},
     #第四行
 {'data': {'id': 'q4', 'label': '+','group': 'q'}, 'position': {'x': 0, 'y': 300}},
-{'data': {'id': 'E41','group': 'E'}, 'position': {'x': 250, 'y': 300}},
+{'data': {'id': 'E41','group': 'ZE'}, 'position': {'x': 250, 'y': 300}},
 {'data': {'id': 'c4','group': 'c'}, 'position': {'x': 300, 'y': 300}},
 {'data': {'id': 'E42','group': 'E'}, 'position': {'x': 350, 'y': 300}},
 {'data': {'id': 'T4','label': 'T','group': 'T'}, 'position': {'x': 700, 'y': 300}},
@@ -43,7 +43,7 @@ elements = [
 {'data': {'source': 'c4', 'target': 'T4'}},
     #第五行
 {'data': {'id': 'q5', 'label': '0','group': 'q'}, 'position': {'x': 0, 'y': 400}},
-{'data': {'id': 'E51','group': 'E'}, 'position': {'x': 250, 'y': 400}},
+{'data': {'id': 'E51','group': 'XE'}, 'position': {'x': 250, 'y': 400}},
 {'data': {'id': 't53','group': 't'}, 'position': {'x': 300, 'y': 400}},
 {'data': {'id': 'E52','group': 'E'}, 'position': {'x': 400, 'y': 400}},
 {'data': {'id': 't55','group': 't'}, 'position': {'x': 500, 'y': 400}},
@@ -56,7 +56,7 @@ elements = [
 {'data': {'source': 't56', 'target': 'T5'}},
     #第六行
 {'data': {'id': 'q6', 'label': '0','group': 'q'}, 'position': {'x': 0, 'y': 500}},
-{'data': {'id': 'E61','group': 'E'}, 'position': {'x': 250, 'y': 500}},
+{'data': {'id': 'E61','group': 'XE'}, 'position': {'x': 250, 'y': 500}},
 {'data': {'id': 't63','group': 't'}, 'position': {'x': 300, 'y': 500}},
 {'data': {'id': 'E62','group': 'E'}, 'position': {'x': 350, 'y': 500}},
 {'data': {'id': 't64','group': 't'}, 'position': {'x': 400, 'y': 500}},
@@ -70,7 +70,7 @@ elements = [
 {'data': {'source': 't66', 'target': 'T6'}},
     #第七行
 {'data': {'id': 'q7', 'label': '0','group': 'q'}, 'position': {'x': 0, 'y': 600}},
-{'data': {'id': 'E71','group': 'E'}, 'position': {'x': 250, 'y': 600}},
+{'data': {'id': 'E71','group': 'XE'}, 'position': {'x': 250, 'y': 600}},
 {'data': {'id': 't73','group': 't'}, 'position': {'x': 300, 'y': 600}},
 {'data': {'id': 'E72','group': 'E'}, 'position': {'x': 350, 'y': 600}},
 {'data': {'id': 't74','group': 't'}, 'position': {'x': 400, 'y': 600}},
@@ -84,7 +84,7 @@ elements = [
 {'data': {'source': 't75', 'target': 'T7'}},
     #第八行
 {'data': {'id': 'q8', 'label': '+','group': 'q'}, 'position': {'x': 0, 'y': 700}},
-{'data': {'id': 'E81','group': 'E'}, 'position': {'x': 150, 'y': 700}},
+{'data': {'id': 'E81','group': 'ZE'}, 'position': {'x': 150, 'y': 700}},
 {'data': {'id': 'c8','group': 'c'}, 'position': {'x': 200, 'y': 700}},
 {'data': {'id': 'E82','group': 'E'}, 'position': {'x': 250, 'y': 700}},
 {'data': {'id': 'T8','label': 'T','group': 'T'}, 'position': {'x': 700, 'y': 700}},
@@ -92,7 +92,7 @@ elements = [
 {'data': {'source': 'c8', 'target': 'T8'}},
     #第九行
 {'data': {'id': 'q9', 'label': '0','group': 'q'}, 'position': {'x': 0, 'y': 800}},
-{'data': {'id': 'E91','group': 'E'}, 'position': {'x': 150, 'y': 800}},
+{'data': {'id': 'E91','group': 'XE'}, 'position': {'x': 150, 'y': 800}},
 {'data': {'id': 't92','group': 't'}, 'position': {'x': 200, 'y': 800}},
 {'data': {'id': 'E92','group': 'E'}, 'position': {'x': 350, 'y': 800}},
 {'data': {'id': 't95','group': 't'}, 'position': {'x': 500, 'y': 800}},
@@ -106,7 +106,7 @@ elements = [
 {'data': {'source': 't96', 'target': 'T9'}},
     #第十行
 {'data': {'id': 'q10', 'label': '0','group': 'q'}, 'position': {'x': 0, 'y': 900}},
-{'data': {'id': 'E101','group': 'E'}, 'position': {'x': 150, 'y': 900}},
+{'data': {'id': 'E101','group': 'XE'}, 'position': {'x': 150, 'y': 900}},
 {'data': {'id': 't102','group': 't'}, 'position': {'x': 200, 'y': 900}},
 {'data': {'id': 'E102','group': 'E'}, 'position': {'x': 300, 'y': 900}},
 {'data': {'id': 't104','group': 't'}, 'position': {'x': 400, 'y': 900}},
@@ -120,7 +120,7 @@ elements = [
 {'data': {'source': 't106', 'target': 'T10'}},
     #第11行
 {'data': {'id': 'q11', 'label': '0','group': 'q'}, 'position': {'x': 0, 'y': 1000}},
-{'data': {'id': 'E111','group': 'E'}, 'position': {'x': 150, 'y': 1000}},
+{'data': {'id': 'E111','group': 'XE'}, 'position': {'x': 150, 'y': 1000}},
 {'data': {'id': 't112','group': 't'}, 'position': {'x': 200, 'y': 1000}},
 {'data': {'id': 'E112','group': 'E'}, 'position': {'x': 300, 'y': 1000}},
 {'data': {'id': 't114','group': 't'}, 'position': {'x': 400, 'y': 1000}},
@@ -134,7 +134,7 @@ elements = [
 {'data': {'source': 't115', 'target': 'T11'}},
     #第12行
 {'data': {'id': 'q12', 'label': '0','group': 'q'}, 'position': {'x': 0, 'y': 1100}},
-{'data': {'id': 'E121','group': 'E'}, 'position': {'x': 150, 'y': 1100}},
+{'data': {'id': 'E121','group': 'XE'}, 'position': {'x': 150, 'y': 1100}},
 {'data': {'id': 't122','group': 't'}, 'position': {'x': 200, 'y': 1100}},
 {'data': {'id': 'E122','group': 'E'}, 'position': {'x': 250, 'y': 1100}},
 {'data': {'id': 't123','group': 't'}, 'position': {'x': 300, 'y': 1100}},
@@ -148,7 +148,7 @@ elements = [
 {'data': {'source': 't126', 'target': 'T12'}},
     #第13行
 {'data': {'id': 'q13', 'label': '0','group': 'q'}, 'position': {'x': 0, 'y': 1200}},
-{'data': {'id': 'E131','group': 'E'}, 'position': {'x': 150, 'y': 1200}},
+{'data': {'id': 'E131','group': 'XE'}, 'position': {'x': 150, 'y': 1200}},
 {'data': {'id': 't132','group': 't'}, 'position': {'x': 200, 'y': 1200}},
 {'data': {'id': 'E132','group': 'E'}, 'position': {'x': 250, 'y': 1200}},
 {'data': {'id': 't133','group': 't'}, 'position': {'x': 300, 'y': 1200}},
@@ -162,7 +162,7 @@ elements = [
 {'data': {'source': 't135', 'target': 'T13'}},
     #第14行
 {'data': {'id': 'q14', 'label': '0','group': 'q'}, 'position': {'x': 0, 'y': 1300}},
-{'data': {'id': 'E141','group': 'E'}, 'position': {'x': 150, 'y': 1300}},
+{'data': {'id': 'E141','group': 'XE'}, 'position': {'x': 150, 'y': 1300}},
 {'data': {'id': 't142','group': 't'}, 'position': {'x': 200, 'y': 1300}},
 {'data': {'id': 'E142','group': 'E'}, 'position': {'x': 250, 'y': 1300}},
 {'data': {'id': 't143','group': 't'}, 'position': {'x': 300, 'y': 1300}},
@@ -176,7 +176,7 @@ elements = [
 {'data': {'source': 't144', 'target': 'T14'}},
     #第15行
 {'data': {'id': 'q15', 'label': '0','group': 'q'}, 'position': {'x': 0, 'y': 1400}},
-{'data': {'id': 'E151','group': 'E'}, 'position': {'x': 50, 'y': 1400}},
+{'data': {'id': 'E151','group': 'XE'}, 'position': {'x': 50, 'y': 1400}},
 {'data': {'id': 't151','group': 't'}, 'position': {'x': 100, 'y': 1400}},
 {'data': {'id': 'E152','group': 'E'}, 'position': {'x': 150, 'y': 1400}},
 {'data': {'id': 't152','group': 't'}, 'position': {'x': 200, 'y': 1400}},
@@ -200,7 +200,7 @@ elements = [
 
     #第16行
 {'data': {'id': 'q16', 'label': '+','group': 'q'}, 'position': {'x': 0, 'y': 1500}},
-{'data': {'id': 'E161','group': 'E'}, 'position': {'x': 50, 'y': 1500}},
+{'data': {'id': 'E161','group': 'ZE'}, 'position': {'x': 50, 'y': 1500}},
 {'data': {'id': 'c16','group': 'c'}, 'position': {'x': 100, 'y': 1500}},
 {'data': {'id': 'E162','group': 'E'}, 'position': {'x': 150, 'y': 1500}},
 {'data': {'id': 'qm', 'group': 'q'}, 'position': {'x': 700, 'y': 1500}},
