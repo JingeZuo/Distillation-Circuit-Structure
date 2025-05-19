@@ -27,6 +27,13 @@ qc=QuantumCircuit(q16,q15,q14,q13,q12,q11,q10,q9,q8,q7,q6,q5,q4,q3,q2,q1)
 
 qc.h([15,14,12,8,0])
 qc.barrier()
+T=[[1],
+      [7,6,5,4,3,2,1],
+      [11,10,9,4,3,2,1],
+      [13,10,9,6,5,2,1],
+      [13,11,9,7,5,3,1],
+      [13,11,10,7,6,4]]
+C=[[0],[8],[12],[14],[15],[1]]
 
 qc.cx(0,1)
 
@@ -54,7 +61,6 @@ qc.barrier()
 
 for i in [13,11,10,7,6,4]:
     qc.cx(1,i)
-
 qc.barrier()
 
 allqubit=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
@@ -70,38 +76,41 @@ qc.draw()
 plt.show()
 #%%
 #stablizer1
+qc=QuantumCircuit(16)
 qc.x(g[0])
-state1=(state0+Statevector.from_instruction(qc))/2
-qc.barrier()
-
+state=state0.evolve(qc)
+state1=(state0+state)/2
+print(np.linalg.norm(state0),np.linalg.norm(state1))
 #%%
 #stablizer2
+qc=QuantumCircuit(16)
 qc.x(g[1])
-state2=(state1+Statevector.from_instruction(qc))/2
-qc.barrier()
-
+state=state1.evolve(qc)
+state2=(state1+state)/2
+print(np.linalg.norm(state1),np.linalg.norm(state2))
 #%%
 #stablizer3
+qc=QuantumCircuit(16)
 qc.x(g[2])
-state3=(state2+Statevector.from_instruction(qc))/2
-qc.barrier()
-
+state=state2.evolve(qc)
+state3=(state2+state)/2
+print(np.linalg.norm(state2),np.linalg.norm(state3))
 #%%
 #stablizer4
+qc=QuantumCircuit(16)
 qc.x(g[3])
-state4=(state3+Statevector.from_instruction(qc))/2
-qc.barrier()
-
+state=state3.evolve(qc)
+state4=(state3+state)/2
+print(np.linalg.norm(state3),np.linalg.norm(state4))
 #%%
 #Logical X+1
+qc=QuantumCircuit(16)
 qc.x(allqubit)
-state=Statevector.from_instruction(qc)
+state=state4.evolve(qc)
 stateLplus=(state4+state)/2
 normLplus=np.linalg.norm(stateLplus.data)
 proLplus=np.vdot(stateLplus.data,stateLplus.data)
-print('逻辑投影+1概率',proLplus)
 stateLplus=stateLplus/normLplus
-qc.barrier()
 
 #%%
 #Logical X-1
@@ -111,8 +120,8 @@ stateLm=(state4-state)/2
 normLminus=np.linalg.norm(stateLm.data)
 stateLminus=(stateLm).evolve(q)
 proLminus=np.vdot(stateLminus.data,stateLminus.data)
-print('逻辑投影-1概率',proLminus)
 stateLminus=stateLminus/normLminus
+
 #%%
 # 定义矩阵
 q=QuantumCircuit(16)
@@ -123,13 +132,23 @@ U = np.array([
 # 创建 Operator 对象
 eigenT= Operator(U)
 q.unitary(eigenT,0,label='EigenT')
-
 magicplus=(stateLplus+stateLplus.evolve(q))/2
 magicminus=(stateLminus+stateLminus.evolve(q))/2
 promplus=np.vdot(magicplus.data,magicplus.data)
 promminus=np.vdot(magicminus.data,magicminus.data)
-print('+1魔术态保真度',promplus)
-print('-1魔术态保真度',promminus)
-print('提纯成功概率',proLplus+proLminus)
 
+
+print('逻辑投影-1概率',proLminus)
+print('逻辑投影+1概率',proLplus)
+print('+1魔术态保真度',np.sqrt(promplus))
+print('-1魔术态保真度',np.sqrt(promminus))
+print('提纯成功概率',proLplus+proLminus)
+#%%
+with open("output.txt", "a") as f:    # "w" 覆盖写入，"a" 追加写入
+    print('162',file=f)
+    print('逻辑投影-1概率', proLminus,file=f)
+    print('逻辑投影+1概率', proLplus,file=f)
+    print('+1魔术态保真度', promplus,file=f)
+    print('-1魔术态保真度', promminus,file=f)
+    print('提纯成功概率', proLplus + proLminus,file=f)
 
