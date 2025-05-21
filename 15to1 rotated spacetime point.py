@@ -27,11 +27,83 @@ qc=QuantumCircuit(q16,q15,q14,q13,q12,q11,q10,q9,q8,q7,q6,q5,q4,q3,q2,q1)
 
 qc.h([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
 state0=Statevector.from_instruction(qc)
+Z=[[14,13,12],
+   [15,14,13],
+   [15,14,12],
+   [15,13,12],
+   [15,12,11],
+   [15,14,11],
+   [15,13,11],
+   [15,14,13,12,11],
+   [13,12,11],
+   [14,12,11],
+   [14,13,11]]
+qc.draw()
+plt.show()
+print(len(Z))
 #%%
 qc=QuantumCircuit(16)
 qc.t([11,12,13,14])
 state1=state0.evolve(qc)
-#%%
-
+state=[]
+state.append([state1])
 qc.draw()
 plt.show()
+print(state[0][0])
+#%%
+for i in range(len(Z)):
+    s=[]
+    for j in range(len(state[i])):
+        qc=QuantumCircuit(16)
+        qc.z(Z[i])
+        qc.z(10-i)
+        sta=(state[i][j]+state[i][j].evolve(qc))/2
+        s.append(sta)
+
+        sta=(state[i][j]-state[i][j].evolve(qc))/2
+        qc=QuantumCircuit(16)
+        qc.x(10-i)
+        s.append(sta.evolve(qc))
+    state.append(s)
+qc.draw()
+plt.show()
+#%%
+print(state[-1][0])
+#%%
+state0=[]
+stamera=[]
+for i in range(len(state[-1])):
+    if all(x==0 for x in state[-1][i])==0:
+        state0.append(state[-1][i])
+        stamera.append(i)
+# %%
+print(len(stamera))
+#%%
+qc=QuantumCircuit(16)
+qc.t([0,1,2,3,4,5,6,7,8,9,10])
+state=[]
+for i in range(len(state0)):
+    state.append(state0[i].evolve(qc))
+print(len(state))
+#%%
+finstate=[]
+for i in range(len(state)):
+    state0 = []
+    state0.append([state[i]])
+    for j in range(len(Z)):
+        s=[]
+        for k in range(len(state0[j])):
+            qc=QuantumCircuit(16)
+            qc.x(10-j)
+            state=(state0[j][k]+state0[j][k].evolve(qc))/2
+            s.append(state)
+
+            state = (state0[j][k] - state0[j][k].evolve(qc)) / 2
+            qc=QuantumCircuit(16)
+            qc.z(Z[j])
+            s.append(state.evolve(qc))
+        state0.append(s)
+    finstate.append(state0[-1])
+print(len(finstate))
+#%%
+print(len(finstate))
