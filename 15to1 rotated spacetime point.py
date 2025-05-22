@@ -47,9 +47,7 @@ qc.t([11,12,13,14])
 state1=state0.evolve(qc)
 state=[]
 state.append([state1])
-qc.draw()
-plt.show()
-print(state[0][0])
+print(len(state[0]))
 #%%
 for i in range(len(Z)):
     s=[]
@@ -65,26 +63,17 @@ for i in range(len(Z)):
         qc.x(10-i)
         s.append(sta.evolve(qc))
     state.append(s)
-qc.draw()
-plt.show()
+print(len(state))
 #%%
-print(state[-1][0])
-#%%
-state0=[]
-stamera=[]
-for i in range(len(state[-1])):
-    if all(x==0 for x in state[-1][i])==0:
-        state0.append(state[-1][i])
-        stamera.append(i)
-# %%
-print(len(stamera))
-#%%
+state0=state[-1]
+
 qc=QuantumCircuit(16)
 qc.t([0,1,2,3,4,5,6,7,8,9,10])
 state=[]
 for i in range(len(state0)):
     state.append(state0[i].evolve(qc))
 print(len(state))
+
 #%%
 finstate=[]
 for i in range(len(state)):
@@ -95,15 +84,40 @@ for i in range(len(state)):
         for k in range(len(state0[j])):
             qc=QuantumCircuit(16)
             qc.x(10-j)
-            state=(state0[j][k]+state0[j][k].evolve(qc))/2
-            s.append(state)
+            sta=(state0[j][k]+state0[j][k].evolve(qc))/2
+            s.append(sta)
 
-            state = (state0[j][k] - state0[j][k].evolve(qc)) / 2
+            sta = (state0[j][k] - state0[j][k].evolve(qc)) / 2
             qc=QuantumCircuit(16)
             qc.z(Z[j])
-            s.append(state.evolve(qc))
+            s.append(sta.evolve(qc))
         state0.append(s)
     finstate.append(state0[-1])
 print(len(finstate))
+
 #%%
-print(len(finstate))
+gener=QuantumCircuit(16)
+gener.x([11,12,13,14])
+U = np.array([
+    [0, np.exp(1j * np.pi / 4)],
+    [np.exp(-1j * np.pi / 4), 0]
+])
+# 创建 Operator 对象
+eigenTdg= Operator(U)
+magic=QuantumCircuit(16)
+magic.unitary(eigenTdg,15,label='EigenT')
+pro=0
+for i in range(len(finstate)):
+    for j in range(len(finstate[i])):
+        prostate=(finstate[i][j]+finstate[i][j].evolve(gener))/2
+        pro=pro+np.vdot(prostate,prostate)
+s=finstate[0][0]
+ns=np.linalg.norm(s)
+s=s/ns
+
+fide=np.linalg.norm((s+s.evolve(magic))/2)
+print(fide)
+print(pro)
+
+
+
